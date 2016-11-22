@@ -76,10 +76,6 @@
     <group-title>循环模式</group-title>
     <swiper loop auto :list="demo06_list" :index="demo06_index" @on-index-change="demo06_onIndexChange"></swiper>
     <p>current index: {{demo06_index}}</p>
-
-    <group-title>循环模式（只有两个）</group-title>
-    <swiper loop auto :list="demo07_list" :index="demo07_index" @on-index-change="demo07_onIndexChange"></swiper>
-    <p>current index: {{demo07_index}}</p>
   </div>
 </template>
 
@@ -96,7 +92,7 @@ const baseList =
   img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/2.jpg',
   title: '茶包VS原叶茶'
 }, {
-  url: 'javascript:',
+  url: 'javascript',
   img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/3.jpg',
   title: '播下茶籽，明春可发芽？'
 }]
@@ -107,18 +103,10 @@ const imgList = [
   'http://placeholder.qiniudn.com/800x300/8AEEB1/ffffff'
 ]
 
-const urlList = baseList.map((item, index) => ({
-  url: 'http://m.baidu.com',
-  img: item.img,
-  title: `(可点击)${item.title}`
-}))
-
 const demoList = imgList.map((one, index) => ({
   url: 'javascript:',
   img: one
 }))
-
-const only2List = baseList.slice(0, 2)
 
 export default {
   components: {
@@ -143,9 +131,6 @@ export default {
     },
     demo06_onIndexChange (index) {
       this.demo06_index = index
-    },
-    demo07_onIndexChange (index) {
-      this.demo07_index = index
     }
   },
   data () {
@@ -155,18 +140,16 @@ export default {
       demo03_list: demoList,
       demo04_list: imgList,
       demo05_list: [],
-      demo06_list: urlList,
-      demo07_list: only2List,
+      demo06_list: baseList,
       demo01_index: 0,
       demo05_index: 0,
-      demo06_index: 0,
-      demo07_index: 0
+      demo06_index: 0
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 .text-scroll {
   border: 1px solid #ddd;
   border-left: none;

@@ -9,7 +9,10 @@ import Popup from './popup'
 
 export default {
   props: {
-    show: Boolean,
+    show: {
+      type: Boolean,
+      twoWay: true
+    },
     height: {
       type: String,
       default: 'auto'
@@ -30,9 +33,8 @@ export default {
         _this.show = true
       },
       onClose (dialog) {
-        _this.show = false
-        if (Object.keys(window.__$vuxPopups).length >= 1) return
         _this.fixSafariOverflowScrolling('touch')
+        _this.show = false
       }
     })
     this.$overflowScrollingList = document.querySelectorAll('.vux-fix-safari-overflow-scrolling')
@@ -44,7 +46,6 @@ export default {
     */
     fixSafariOverflowScrolling (type) {
       if (!this.$overflowScrollingList.length) return
-      if (!/iphone/i.test(navigator.userAgent)) return
       for (let i = 0; i < this.$overflowScrollingList.length; i++) {
         this.$overflowScrollingList[i].style.webkitOverflowScrolling = type
       }
@@ -73,7 +74,6 @@ export default {
   },
   beforeDestroy () {
     this.popup.destroy()
-    this.fixSafariOverflowScrolling('touch')
   }
 }
 </script>
@@ -111,6 +111,7 @@ export default {
 }
 .vux-popup-transiton {}
 .vux-popup-enter {
+  background-color:red;
   transform: translate3d(0, 100%, 0);
 }
 .vux-popup-leave {

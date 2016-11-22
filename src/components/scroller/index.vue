@@ -57,7 +57,6 @@ export default {
       type: Boolean,
       default: true
     },
-    stopPropagation: Boolean,
     boundryCheck: {
       type: Boolean,
       default: true
@@ -91,11 +90,13 @@ export default {
     },
     pulldownStatus: {
       type: String,
-      default: 'default'
+      default: 'default',
+      twoWay: true
     },
     pullupStatus: {
       type: String,
-      default: 'default'
+      default: 'default',
+      twoWay: true
     },
     enableHorizontalSwiping: {
       type: Boolean,
@@ -162,8 +163,7 @@ export default {
       useTransition: this.useTransition,
       preventDefault: this.preventDefault,
       boundryCheck: this.boundryCheck,
-      gpuAcceleration: this.gpuAcceleration,
-      stopPropagation: this.stopPropagation
+      gpuAcceleration: this.gpuAcceleration
     })
 
     if (this.usePulldown) {

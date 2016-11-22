@@ -11,7 +11,10 @@ import ErrorCorrectLevel from 'qr.js/lib/ErrorCorrectLevel'
 
 export default {
   props: {
-    value: String,
+    value: {
+      type: String,
+      required: true
+    },
     size: {
       type: Number,
       default: 80

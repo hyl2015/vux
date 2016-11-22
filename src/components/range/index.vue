@@ -29,7 +29,10 @@ export default {
       default: 0
     },
     disabled: Boolean,
-    disabledOpacity: Number,
+    disabledOpacity: {
+      type: Number,
+      default: 0.75
+    },
     rangeBarHeight: {
       type: Number,
       default: 1
@@ -62,25 +65,12 @@ export default {
   watch: {
     value (val) {
       this.range.setStart(val)
-    },
-    'min + max': function () {
-      let value = this.value
-      if (value < this.min) {
-        value = this.min
-      }
-      if (value > this.max) {
-        value = this.max
-      }
-      this.range.reInit({min: this.min, max: this.max, value: value})
-      this.value = value
-      this.range.setStart(this.value)
     }
   }
 }
 </script>
 
-<style lang="less">
-@import '../../styles/variable.less';
-@import './powerange.less';
+<style>
+@import './powerange.css';
 </style>
 

@@ -9,6 +9,7 @@
   display: table;
   white-space: nowrap;
   height: auto;
+  margin: '';
   overflow: hidden;
   line-height: 1;
   text-align: center;

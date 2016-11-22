@@ -18,19 +18,18 @@ const parentMixin = {
   props: {
     index: {
       type: Number,
-      default: -1
+      default: 0
     }
   },
   watch: {
     index (val, oldVal) {
-      oldVal > -1 && this.$children[oldVal] && (this.$children[oldVal].selected = false)
-      val > -1 && (this.$children[val].selected = true)
+      this.$children[oldVal].selected = false
+      this.$children[val].selected = true
     }
   },
   data () {
     return {
-      number: this.$children.length,
-      index: 0
+      number: this.$children.length
     }
   }
 }
@@ -53,19 +52,15 @@ const childMixin = {
   },
   methods: {
     onItemClick () {
-      if (typeof this.disabled === 'undefined' || this.disabled === false) {
-        this.selected = true
-        this.$parent.index = this.index
-        this.$emit('on-item-click')
-      }
+      this.selected = true
+      this.$parent.index = this.index
+      this.$emit('on-item-click')
     }
   },
   watch: {
     selected (val) {
       if (val) {
         this.$parent.index = this.index
-      } else {
-        this.$parent.index = -1
       }
     }
   },

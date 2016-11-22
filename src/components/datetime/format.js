@@ -1,4 +1,4 @@
-module.exports = function (date, fmt = 'YYYY-MM-DD HH:mm:ss') {
+module.exports = function (date, fmt) {
   var o = {
     'M+': date.getMonth() + 1,
     'D+': date.getDate(),

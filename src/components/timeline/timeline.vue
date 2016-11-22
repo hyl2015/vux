@@ -9,10 +9,9 @@
 <script>
 export default {
   props: {
-    color: String,
-    isShowIcon: {
-      type: Boolean,
-      default: true
+    color: {
+      type: String,
+      default: '#04BE02'
     }
   },
   methods: {
@@ -29,72 +28,64 @@ export default {
 </script>
 
 <style lang="less">
-@import '../../styles/variable.less';
-
-.vux-timeline {
-  padding: 1rem;
-}
-
-.vux-timeline > ul > li {
-  list-style: none;
-}
-
-@vux-timeline: ~"vux-timeline";
-
-.@{vux-timeline} {
-  &-item {
-    position:relative;
+  .vux-timeline {
+    padding: 1rem;
   }
 
-  &-item-content {
-    padding:0 0 1.5rem 1.2rem;
+  .vux-timeline > ul > li {
+    list-style: none;
   }
 
-  &-item-head, &-item-head-first {
-    position:absolute;
-    content:'';
-    z-index:99;
-    border-radius:99px;
-  }
+  @vux-timeline: ~"vux-timeline";
 
-  &-item-head {
-    width:10px;
-    height:10px;
-    left:1px;top:4px;
-  }
+  .@{vux-timeline} {
+    &-item {
+      position:relative;
+    }
 
-  &-item-head-first {
-    width:20px;
-    height:20px;
-    left:-4px;top:5px;
-  }
+    &-item-content {
+      padding:0 0 1.5rem 1.2rem;
+    }
 
-  &-item-tail {
-    position:absolute;
-    content:'';
-    height:100%;
-    width:2px;
-    left:5px;
-    top:5px;
-    background-color: @timeline-item-bg-color;
-  }
+    &-item-head, &-item-head-first {
+      position:absolute;
+      content:'';
+      z-index:99;
+      border-radius:99px;
+    }
 
-  &-item-checked {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 45%;
-    transform: translateY(-50%);
+    &-item-head {
+      width:10px;
+      height:10px;
+      left:1px;top:4px;
+    }
 
-    &.weui_icon_success_no_circle::before {
-      font-size: 12px;
-      width: 20px;
-      color: #FFF;
+    &-item-head-first {
+      width:20px;
+      height:20px;
+      left:-4px;top:5px;
+    }
+
+    &-item-tail {
+      position:absolute;
+      content:'';
+      height:100%;
+      width:2px;
+      left:5px;top:5px;
+    }
+
+    &-item-checked {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 45%;
+      transform: translateY(-50%);
+
+      &::before {
+        font-size: 12px;
+        width: 20px;
+        color: #FFF;
+      }
     }
   }
-}
-
-.vux-timeline-item-color {
-	background-color: @timeline-item-bg-color;
-}
 </style>

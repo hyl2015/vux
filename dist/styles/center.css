@@ -1,8 +1,4 @@
-/*!
- * Vux v0.1.3-rc5 (https://vux.li)
- * Licensed under the MIT license
- */
- .vux-center-v, .vux-center-h, .vux-center {
+.vux-center-v, .vux-center-h, .vux-center {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
