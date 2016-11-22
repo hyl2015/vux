@@ -29,10 +29,6 @@ export default {
       type: String,
       default: '#666'
     },
-    disabledColor: {
-      type: String,
-      default: '#ddd'
-    },
     animate: {
       type: Boolean,
       default: true

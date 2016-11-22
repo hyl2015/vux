@@ -2,10 +2,10 @@
   <div class="vux-slider">
     <div class="vux-swiper" :style="{height: xheight}">
       <slot></slot>
-      <div class="vux-swiper-item"  v-for="(index, item) in list" @click="clickListItem(item)" :data-index="index">
-        <a :href="item.url">
-          <div class="vux-img {{item.cls}}"></div>
-          <p class="vux-swiper-desc" v-if="showDescMask">{{item.title}}</p>
+      <div class="vux-swiper-item" v-for="item in list" @click="clickListItem(item)">
+        <a href="javascript:">
+          <div class="vux-img" :style="{backgroundImage: buildBackgroundUrl(item.img)}"></div>
+          <p class="vux-swiper-desc">{{item.title}}</p>
         </a>
       </div>
     </div>
@@ -37,7 +37,6 @@ export default {
       return `url(${url})`
     },
     render () {
-      this.swiper && this.swiper.destroy()
       this.swiper = new Swiper({
         container: this.$el,
         direction: this.direction,
@@ -51,8 +50,8 @@ export default {
         imgList: this.imgList
       })
       .on('swiped', (prev, index) => {
-        this.current = index % this.length
-        this.index = index % this.length
+        this.current = index
+        this.index = index
       })
     },
     rerender () {
@@ -94,10 +93,6 @@ export default {
       default: 'horizontal'
     },
     showDots: {
-      type: Boolean,
-      default: true
-    },
-    showDescMask: {
       type: Boolean,
       default: true
     },

@@ -35,11 +35,6 @@ export default {
         return {}
       }
     }
-  },
-  watch: {
-    endVal (val) {
-      this._countup.update(val)
-    }
   }
 }
 </script>

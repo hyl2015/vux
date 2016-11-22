@@ -1,7 +1,7 @@
 <template>
 	<div class="weui_cell" :class="{'weui_cell_warn': !valid}">
     <div class="weui_cell_hd">
-      <label class="weui_label" :style="{width: $parent.labelWidth || (labelWidth + 'em'), textAlign: $parent.labelAlign, marginRight: $parent.labelMarginRight}" v-if="title">{{title}}</label>
+      <label class="weui_label" :style="{width: labelWidth + 'em'}" v-if="title">{{title}}</label>
       <inline-desc v-if="inlineDesc">{{inlineDesc}}</inline-desc>
     </div>
     <div class="weui_cell_bd weui_cell_primary">
@@ -22,9 +22,9 @@
       v-el:input/>
     </div>
     <div class="weui_cell_ft">
-      <icon type="clear" v-show="showClear && value && !readonly" @click="clear"></icon>
-      <icon class="vux-input-icon-warn" type="warn" title="{{!valid ? firstError : ''}}" v-show="!equalWith && ((touched && !valid && firstError) || (forceShowError && !valid && firstError))"></icon>
-      <icon class="vux-input-icon-warn" type="warn" v-show="hasLengthEqual && dirty && equalWith && !valid"></icon>
+      <icon type="clear" v-show="showClear && value" @click="clear"></icon>
+      <icon type="warn" title="{{!valid ? firstError : ''}}" v-show="!equalWith && ((touched && !valid && firstError) || (forceShowError && !valid && firstError))"></icon>
+      <icon type="warn" v-show="hasLengthEqual && dirty && equalWith && !valid"></icon>
       <icon type="success" v-show="equalWith && equalWith===value && valid"></icon>
       <slot name="right"><slot>
     </div>
@@ -59,7 +59,7 @@ const validators = {
 }
 export default {
   ready () {
-    if (!this.title && !this.placeholder && !this.value) {
+    if (!this.title && !this.placeholder) {
       console.warn('no title and no placeholder?')
     }
     if (this.equalWith) {
@@ -83,7 +83,11 @@ export default {
       default: ''
     },
     placeholder: String,
-    value: [String, Number],
+    value: {
+      type: String,
+      default: '',
+      twoWay: true
+    },
     name: String,
     readonly: {
       type: Boolean,
@@ -176,7 +180,6 @@ export default {
         if (this.value.length < this.min) {
           this.errors.min = this.$interpolate('最少应该输入{{min}}个字符哦')
           this.valid = false
-          this.getError()
           return
         } else {
           delete this.errors.min
@@ -247,7 +250,4 @@ export default {
 @import '../../styles/weui/widget/weui_cell/weui_cell_global';
 @import '../../styles/weui/widget/weui_cell/weui_form/weui_form_common';
 @import '../../styles/weui/widget/weui_cell/weui_form/weui_vcode';
-.vux-input-icon-warn.weui_icon_warn:before {
-  font-size: 21px;
-}
 </style>

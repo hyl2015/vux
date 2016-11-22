@@ -1,6 +1,7 @@
 export default () => ({
   value: {
     type: String,
+    twoWay: true,
     default: ''
   },
   renderMonth: {
@@ -47,7 +48,9 @@ export default () => ({
   },
   weeksList: {
     type: Array,
-    default: () => ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+    coerce (val) {
+      return val && val.length ? val : ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+    }
   },
   customSlotFn: {
     type: Function,
@@ -58,10 +61,6 @@ export default () => ({
     default: true
   },
   disablePast: {
-    type: Boolean,
-    default: false
-  },
-  disableFuture: {
     type: Boolean,
     default: false
   }

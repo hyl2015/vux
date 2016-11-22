@@ -1,21 +1,23 @@
 <template>
   <div>
-    <br>
-    <progress :percent="percent1"></progress>
-    <br>
-    <box gap="10px">
-      <progress :percent="percent1" :show-cancel="false"></progress>
-    </box>
+    <progress></progress>
+    <br/>
+    <progress :percent.sync="percent1"></progress>
+    <br/>
+    <progress :template="2"></progress>
+    <br/>
+    <progress :template="3"></progress>
+    <br/>
+    <progress :template="4"></progress>
   </div>
 </template>
 
 <script>
-import { Progress, Box } from '../components'
+import { Progress } from '../components'
 
 export default {
   components: {
-    Progress,
-    Box
+    Progress
   },
   data () {
     return {

@@ -5,18 +5,16 @@
 <script>
 export default {
   props: {
-    text: [String, Number]
+    text: String
   }
 }
 </script>
 
 <style lang="less">
-@import '../../styles/variable.less';
-
 .vux-badge {
   display: inline-block;
   text-align: center;
-  background: @badge-bg-color;
+  background: #f74c31;
   color: #fff;
   font-size: 12px;
   height: 16px;

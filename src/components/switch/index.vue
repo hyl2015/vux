@@ -31,13 +31,16 @@ export default {
       type: String,
       required: true
     },
-    disabled: Boolean,
-    value: {
+    disabled: {
       type: Boolean,
       default: false
     },
+    value: {
+      type: Boolean
+    },
     inlineDesc: String
   },
+  ready () {},
   watch: {
     value (newVal) {
       this.$emit('on-change', newVal)

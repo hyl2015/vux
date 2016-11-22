@@ -10,15 +10,14 @@ import { childMixin } from '../../mixins/multi-items'
 export default {
   mixins: [childMixin],
   props: {
-    activeClass: String,
-    disabled: Boolean
+    activeClass: String
   },
   computed: {
     style () {
       return {
         borderWidth: this.$parent.lineWidth + 'px',
         borderColor: this.$parent.activeColor,
-        color: this.selected ? this.$parent.activeColor : this.disabled ? this.$parent.disabledColor : this.$parent.defaultColor,
+        color: this.selected ? this.$parent.activeColor : this.$parent.defaultColor,
         border: this.$parent.animate ? 'none' : 'auto'
       }
     }

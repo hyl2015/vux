@@ -1,10 +1,9 @@
 <template>
-  <div class="vux-toast">
-    <div class="weui_mask_transparent" v-show="show"></div>
-      <div class="weui_toast" :style="{width: width}" :class="toastClass" v-show="show" :transition="transition">
+  <div v-show="show" class="vux-toast" :transition="transition">
+    <div class="weui_mask_transparent"></div>
+      <div class="weui_toast" :style="{width: width}" :class="toastClass">
         <i class="weui_icon_toast" v-show="type !== 'text'"></i>
-        <p class="weui_toast_content" v-if="text" v-html="text"></p>
-        <p class="weui_toast_content" v-else><slot></slot></p>
+        <p class="weui_toast_content"><slot></slot></p>
       </div>
   </div>
 </template>
@@ -31,8 +30,7 @@ export default {
     width: {
       type: String,
       default: '7.6em'
-    },
-    text: String
+    }
   },
   computed: {
     toastClass () {
@@ -50,7 +48,6 @@ export default {
         clearTimeout(this.timeout)
         this.timeout = setTimeout(() => {
           this.show = false
-          this.$emit('on-hide')
         }, this.time)
       }
     }
@@ -59,12 +56,12 @@ export default {
 </script>
 
 <style lang="less">
-@import '../../styles/transition.less';
 @import '../../styles/weui/widget/weui_tips/weui_mask';
 @import '../../styles/weui/icon/weui_icon_font';
 @import '../../styles/weui/widget/weui_tips/weui_toast';
 
 .weui_toast {
+  z-index: 200;
   transform: translateX(-50%);
   margin-left: 0!important;
 }

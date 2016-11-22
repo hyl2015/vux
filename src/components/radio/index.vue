@@ -36,7 +36,10 @@ export default {
       type: Array,
       required: true
     },
-    value: String,
+    value: {
+      type: String,
+      twoWay: true
+    },
     fillMode: {
       type: Boolean,
       default: false

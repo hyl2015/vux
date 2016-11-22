@@ -84,6 +84,9 @@ export default {
         return {}
       }
     }
+  },
+  beforeDestroy () {
+    this.photoswipe && this.photoswipe.destroy()
   }
 }
 </script>
