@@ -8,13 +8,12 @@
       :autocorrect="autocorrect"
       :spellcheck="spellcheck"
       :placeholder="placeholder"
-      :readonly="readonly"
       :name="name"
       :rows="rows"
       :cols="cols"
       v-model="value"
       :style="textareaStyle"
-      :maxlength="max" v-el:textarea></textarea>
+      :maxlength="max"></textarea>
       <div class="weui_textarea_counter" v-show="showCounter && max"><span>{{count}}</span>/{{max}}</div>
     </div>
   </div>
@@ -41,10 +40,6 @@ export default {
       type: String,
       default: ''
     },
-    readonly: {
-      type: Boolean,
-      default: false
-    },
     rows: {
       type: Number,
       default: 3
@@ -70,11 +65,7 @@ export default {
   },
   computed: {
     count () {
-      let len = 0
-      if (this.value) {
-        len = this.value.replace(/\n/g, 'aa').length
-      }
-      return len > this.max ? this.max : len
+      return this.value.length
     },
     textareaStyle () {
       if (this.height) {

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import App from './App'
 
 import Wechat from './Wechat'
+import Home from './Home'
 import Yi from './yi'
 import Icon from './demos/Icon'
 import Switch from './demos/Switch'
@@ -26,6 +27,7 @@ import Actionsheet from './demos/Actionsheet'
 import Clocker from './demos/Clocker'
 import Rater from './demos/Rater'
 import PopupPicker from './demos/Popup-picker'
+import Address from './demos/Address'
 import Toast from './demos/Toast'
 import Loading from './demos/Loading'
 import Alert from './demos/Alert'
@@ -40,7 +42,6 @@ import Cell from './demos/Cell'
 import Demo from './demos/Demo'
 import Emotion from './demos/Wechat-emotion'
 import Search from './demos/Search'
-import SearchStatic from './demos/Search-static'
 import Donate from './demos/Donate'
 import Thanks from './demos/Thanks'
 import Spinner from './demos/Spinner'
@@ -59,12 +60,11 @@ import Countdown from './demos/Countdown'
 import XHeader from './demos/X-header'
 import Inview from './demos/Inview'
 import InlineCalendar from './demos/Inline-calendar'
-import InlineCalendarStartDate from './demos/Inline-calendar-start-date'
 import Checker from './demos/Checker'
 import ScrollerFull from './demos/Scroller-full'
 import NumberRoller from './demos/Number-roller'
 import Timeline from './demos/Timeline'
-import Step from './demos/Step'
+import Steps from './demos/Steps'
 import Tabbar from './demos/Tabbar'
 import TabbarLink from './demos/TabbarLink'
 import Panel from './demos/Panel'
@@ -80,19 +80,11 @@ import DateFormatter from './demos/Date-formatter'
 import Card from './demos/Card'
 import Previewer from './demos/Previewer'
 import IconLoading from './demos/Icon-loading'
-import Test from './demos/Test'
-import Issue189 from './demos/Issue189'
-import Issue461 from './demos/Issue461'
-import Issue414 from './demos/Issue414'
-import Divider from './demos/Divider'
-import Fullpage from './components/fullpage/DemoBasic'
-import Popover from './components/popover/DemoIndex'
+import XSwiper from './demos/x-swiper'
 
 // plugins
 import Device from './plugins/device'
 import DeviceDemo from './demos/Device'
-import ToastPlugin from './plugins/toast'
-import AlertPlugin from './plugins/alert'
 
 const FastClick = require('fastclick')
 FastClick.attach(document.body)
@@ -102,57 +94,12 @@ Vue.config.devtools = true
 
 // $device
 Vue.use(Device)
-Vue.use(ToastPlugin)
-Vue.use(AlertPlugin)
 
-const router = new Router({
-  transitionOnLoad: false
-})
-
-/**
- * sync router params
- */
-import { sync } from 'vuex-router-sync'
-import store from './vuex/store'
-
-let history = window.sessionStorage
-history.clear()
-let historyCount = history.getItem('count') * 1 || 0
-history.setItem('/', 0)
-
-/**
- * sync router loading status
- */
-const commit = store.commit || store.dispatch
-router.beforeEach(({ to, from, next }) => {
-  const toIndex = history.getItem(to.path)
-  const fromIndex = history.getItem(from.path)
-  if (toIndex) {
-    if (toIndex > fromIndex || !fromIndex) {
-      commit('UPDATE_DIRECTION', 'forward')
-    } else {
-      commit('UPDATE_DIRECTION', 'reverse')
-    }
-  } else {
-++historyCount
-history.setItem('count', historyCount)
-to.path !== '/' && history.setItem(to.path, historyCount)
-commit('UPDATE_DIRECTION', 'forward')
-}
-commit('UPDATE_LOADING', true)
-setTimeout(next, 50)
-})
-router.afterEach(() => {
-  commit('UPDATE_LOADING', false)
-})
-
-sync(store, router)
+const router = new Router()
 
 router.map({
   '/': {
-    component: function (resolve) {
-      require(['./Home'], resolve)
-    }
+    component: Home
   },
   '/demo/wechat': {
     component: Wechat
@@ -227,9 +174,7 @@ router.map({
     component: PopupPicker
   },
   '/component/address': {
-    component: function (resolve) {
-      require(['./demos/Address'], resolve)
-    }
+    component: Address
   },
   '/component/toast': {
     component: Toast
@@ -272,9 +217,6 @@ router.map({
   },
   '/component/search': {
     component: Search
-  },
-  '/component/search-static': {
-    component: SearchStatic
   },
   '/project/donate': {
     component: Donate
@@ -330,9 +272,6 @@ router.map({
   '/component/inline-calendar': {
     component: InlineCalendar
   },
-  '/component/inline-calendar-start-date': {
-    component: InlineCalendarStartDate
-  },
   '/component/checker': {
     component: Checker
   },
@@ -348,8 +287,8 @@ router.map({
   '/component/timeline': {
     component: Timeline
   },
-  '/component/step': {
-    component: Step
+  '/component/steps': {
+    component: Steps
   },
   '/component/tabbar': {
     component: Tabbar
@@ -393,29 +332,11 @@ router.map({
   '/component/icon-loading': {
     component: IconLoading
   },
+  '/component/x-swiper': {
+    component: XSwiper
+  },
   '/plugin/device': {
     component: DeviceDemo
-  },
-  '/test': {
-    component: Test
-  },
-  '/issue/189': {
-    component: Issue189
-  },
-  '/issue/461': {
-    component: Issue461
-  },
-  '/issue/414': {
-    component: Issue414
-  },
-  '/component/divider': {
-    component: Divider
-  },
-  '/component/fullpage': {
-    component: Fullpage
-  },
-  '/component/popover': {
-    component: Popover
   }
 })
 
